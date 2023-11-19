@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hex Edit</title>
+    <link rel="stylesheet" href="/static/css/main.css" />
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $("document").ready(function() {
+            $("#hexinput").on("click", onMouseClickHexInput);
+        });
+        function onMouseClickHexInput(evt) {
+            var hexContent  = $("#hexinput").val()
+            $("#hexinfo").text("Content is: " + hexContent);
+        }
+    </script>
+</head>
+
+<body>
+
+<form action="/action.php" method="post">
+<p> Enter hex. Click on box to format it</p>
+<textarea id="hexinput" cols="100" name="comments" rows="20">Hex</textarea><br />
+<div id="hexinfo">
+</div>
+<input type="submit" value="Format Hex" />
+</form>
+
+
+
+</body>
+
+</html>
