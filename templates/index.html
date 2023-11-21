@@ -25,6 +25,18 @@
 <input type="submit" value="Format Hex" />
 </form>
 
+<div class="container">
+  <form action="/tcp" method="post">
+ <div class="row">
+    <div class="col-25">
+      <label for="dport">Destination port</label>
+    </div>
+    <div class="col-75">
+      <input type="text" id="dport" name="dport" value="80" type="number" min="0" step="1" max="65535" size="5">
+    </div>
+  </div>
+</div>
+
 
 
 </body>
