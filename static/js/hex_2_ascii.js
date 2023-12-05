@@ -34,8 +34,9 @@ function hexToFormattedHex(str){
 function addLineBreaksToHex(str){
     strOut = '';
     for (x = 0; x < str.length; x += 48) {
-        hexLine = str.substr(x, 48);
-        strOut += hexLine + "\n";
+        hexLinePart1 = str.substring(x, x+24);
+        hexLinePart2 = str.substring(x+24, x+48);
+        strOut = strOut + hexLinePart1 + "  " + hexLinePart2 + "\n";
     }
     return strOut;
 }
@@ -43,8 +44,9 @@ function addLineBreaksToHex(str){
 function addLineBreaksToAscii(str){
     strOut = '';
     for (x = 0; x < str.length; x += 16) {
-        hexLine = str.substr(x, 16);
-        strOut += hexLine + "\n";
+        hexLinePart1 = str.substring(x, x+ 8);
+        hexLinePart2 = str.substring(x + 8, x+16);
+        strOut = strOut + hexLinePart1 + " " + hexLinePart2 + "\n";
     }
     return strOut;
 }
@@ -55,4 +57,4 @@ console.log(hexToAscii("30313233343536"))
 console.log(hexToAscii(" 30 313233 343536  \n 31 32 45"))
 console.log(hexToFormattedHex("    30 313233 343536  ff a"))
 console.log(addLineBreaksToHex("30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31 30 31 31"))
-console.log(addLineBreaksToAscii("12345678901234567890"));
+console.log(addLineBreaksToAscii("123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890"));
