@@ -11,32 +11,50 @@
         });
         function onMouseClickHexInput(evt) {
             var hexContent = hexToAscii($("#hexinput").val());
-            $("#hexinfo").text("Content is: " + hexContent);
+            $("textarea#hexoutput").val(hexContent);
+            var cleanedHex = hexToFormattedHex($("#hexinput").val());
+            $("textarea#hexinput").val(cleanedHex);
         }
     </script>
 </head>
 
 <body>
 
-<form action="/action.php" method="post">
-<p> Enter hex. Click on box to format it</p>
-<textarea id="hexinput" cols="100" name="comments" rows="20">Hex</textarea><br />
+<table>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+<p> Enter hex below. Mouse click to format it</p>
+</td>
+<td>
+</td>
+</tr>
+<tr>
+<td>
+<textarea id="linenumbers" cols="8" name="comments" rows="20">
+{% for i in range(18) -%}
+  {{ '%08x' % (i * 16)  }}
+{% endfor %}
+</textarea><br />
+</td>
+<td>&nbsp;
+<textarea id="hexinput" cols="50" name="comments" rows="20"></textarea><br />
+</td>
+<td>
 <div id="hexinfo">
 </div>
-<input type="submit" value="Format Hex" />
-</form>
+<textarea id="hexoutput" cols="18" name="comments" rows="20"></textarea><br />
+</td>
+</tr>
+</tbody>
+</table>
 
-<div class="container">
-  <form action="/tcp" method="post">
- <div class="row">
-    <div class="col-25">
-      <label for="dport">Destination port</label>
-    </div>
-    <div class="col-75">
-      <input type="text" id="dport" name="dport" value="80" type="number" min="0" step="1" max="65535" size="5">
-    </div>
-  </div>
-</div>
+<p>
+Sample hex: 303131333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f5051525354555665658595a5b5c
+</p>
+
 
 
 
