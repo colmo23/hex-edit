@@ -55,6 +55,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     hexInput.addEventListener('input', updateEditor);
 
+    document.getElementById('save-btn').addEventListener('click', () => {
+        const raw = hexInput.value.replace(/[^0-9a-fA-F]/g, '');
+        const bytes = new Uint8Array(raw.length / 2);
+        for (let i = 0; i < bytes.length; i++) {
+            bytes[i] = parseInt(raw.substr(i * 2, 2), 16);
+        }
+        const blob = new Blob([bytes], { type: 'application/octet-stream' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = document.getElementById('filename').value || 'download.bin';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+
     let isSyncing = false;
     function syncScroll(source) {
         if (isSyncing) return;

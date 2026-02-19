@@ -7,6 +7,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <div class="toolbar">
+        <input type="text" id="filename" class="filename-input" value="download.bin" spellcheck="false">
+        <button id="save-btn" class="save-btn">Save Binary</button>
+    </div>
     <div class="editor-container">
         <div class="col col-offset">
             <div class="col-header">Offset</div>
