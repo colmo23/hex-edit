@@ -3,43 +3,78 @@ body {
     background-color: #f0f0f0;
     margin: 0;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 .editor-container {
     display: flex;
-    width: 100%;
     height: 90vh;
     background-color: #fff;
     border: 1px solid #ccc;
+    overflow: hidden;
 }
 
-.line-numbers, .ascii-output {
+.col {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+}
+
+.col-offset,
+.col-hex {
+    border-right: 1px solid #ccc;
+}
+
+.col-header {
+    padding: 5px 10px;
+    background-color: #e4e4e4;
+    color: #555;
+    font-size: 11px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid #ccc;
+    flex-shrink: 0;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.col-offset .col-header {
+    text-align: right;
+}
+
+.line-numbers {
     padding: 10px;
     background-color: #f7f7f7;
     color: #999;
     text-align: right;
     white-space: pre;
-    flex-shrink: 0;
-    overflow-y: auto;
+    flex: 1;
+    overflow-y: scroll;
     font-size: 14px;
     line-height: 1.5;
+    /* "0x00000000" = 10 chars + padding + scrollbar */
+    width: calc(10ch + 37px);
+    box-sizing: border-box;
 }
 
-.line-numbers{
-    width: 80px;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.ascii-output{
-    width: 240px;
+.ascii-output {
+    padding: 10px;
+    background-color: #f7f7f7;
+    color: #999;
     text-align: left;
+    white-space: pre;
+    flex: 1;
+    overflow-y: scroll;
     font-size: 14px;
     line-height: 1.5;
+    /* 16 chars per line + padding + scrollbar */
+    width: calc(16ch + 37px);
+    box-sizing: border-box;
 }
 
 .hex-input {
-    flex-grow: 1;
+    flex: 1;
     border: none;
     padding: 10px;
     font-family: monospace;
@@ -50,4 +85,7 @@ body {
     white-space: pre;
     overflow-x: hidden;
     overflow-y: scroll;
+    /* 16 bytes × 3 chars − 1 trailing space = 47 chars + padding + scrollbar */
+    width: calc(47ch + 37px);
+    box-sizing: border-box;
 }

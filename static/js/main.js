@@ -54,11 +54,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     hexInput.addEventListener('input', updateEditor);
-    
-    hexInput.addEventListener('scroll', () => {
-        lineNumbers.scrollTop = hexInput.scrollTop;
-        asciiOutput.scrollTop = hexInput.scrollTop;
-    });
+
+    let isSyncing = false;
+    function syncScroll(source) {
+        if (isSyncing) return;
+        isSyncing = true;
+        const top = source.scrollTop;
+        [lineNumbers, hexInput, asciiOutput].forEach(el => {
+            if (el !== source) el.scrollTop = top;
+        });
+        isSyncing = false;
+    }
+
+    hexInput.addEventListener('scroll', () => syncScroll(hexInput));
+    lineNumbers.addEventListener('scroll', () => syncScroll(lineNumbers));
+    asciiOutput.addEventListener('scroll', () => syncScroll(asciiOutput));
 
     if (hexInput.value) {
         updateEditor();
